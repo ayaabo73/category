@@ -24,5 +24,20 @@
                 <a href= {{ url('/category') }}> اضافة تصنيف جديد</a>
 
             </form>
-
+              @foreach ($articales as $articale )
+        
+               <table class="table">
+  <thead>
+    <tr>
+      <th scope="id">{{ $articale->id }}</th>
+      <th scope="title">{{ $articale->title}}</th>
+       <th scope="body">{{ $articale->body }}</th>
+          @foreach ($articale->categories as $category )
+         <th scope="category">{{ $category->name}}</th>
+         @endforeach
+      
+    </tr>
+   </thead>
+   </table>
+              @endforeach
    
