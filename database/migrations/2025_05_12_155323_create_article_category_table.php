@@ -1,10 +1,10 @@
 <?php
 
+use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Article;
-use App\Models\category;
 
 return new class extends Migration
 {
@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('article_category', function (Blueprint $table) {
             $table->id();
-             $table->foreignIdFor(Article::class)->OnDelete('cascade');
-             $table->foreignIdFor(category::class)->OnDelete('cascade');
+            $table->foreignIdFor(Article::class)->OnDelete('cascade');
+            $table->foreignIdFor(Category::class)->OnDelete('cascade');
             $table->timestamps();
         });
     }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\category;
 
 class CategoryController extends Controller
 {
@@ -13,14 +13,13 @@ class CategoryController extends Controller
         return view('category');
     }
 
-
-     public function store( Request $request)
+    public function store(Request $request)
     {
-       category::create([
-       'name'=>$request->name,
-       ]);
-    
-          return response('تمت الاضافة ');
+        Category::create([
+            'name' => $request->name,
+        ]);
+
+        return response('تمت الاضافة ');
 
     }
 }
