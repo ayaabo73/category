@@ -1,23 +1,30 @@
 <h1>creat new article<h1>
-
+ 
              <form action="{{route('store') }}" method="get'>
              @csrf
             
-                     <input type="text"  name="title" placeholder="title"><br><br>
+                     <input type="text"  name="title" placeholder="title"  class="@error('title') is-invalid @enderror">
+                     @error('title')
+                     <div class="alert alert-danger">{{ $message }}</div>
+                     @enderror
+                     <br><br>
                          
-                     <textarea  name="body" placeholder="body" ></textarea><br><br>
+                     <textarea  name="body" placeholder="body"  class="@error('body') is-invalid @enderror"></textarea><br><br>
                      
-                   
+                    @error('body')
+                     <div class="alert alert-danger">{{ $message }}</div>
+                     @enderror
 						
-						<select class="form-select" aria-label="Default select example" name="category_ids"  multiple  >
+						<select class="form-select" aria-label="Default select example" name="category_ids" class="@error('category_ids') is-invalid @enderror"  multiple  >
+               @error('category_ids')
+                     <div class="alert alert-danger">{{ $message }}</div>
+                     @enderror
                         <option selected >Open this select menu</option>
                            @foreach ($categorys as $category )
                         <option value="{{ $category ->id }}" >{{ $category ->name }}</option>
                         @endforeach
                         </select>
-
-							
-                            <br><br>
+                      <br><br>
                 <button type="submit">save</button>
                 <br><br>
             
