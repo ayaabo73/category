@@ -24,8 +24,8 @@ class ArticleController extends Controller
       
         $article = Article::create([
        
-            'title' => $request->title,
-            'body' => $request->body,
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
 
         ]);
         $article->categories()->sync($request->category_ids);

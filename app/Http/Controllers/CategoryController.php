@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         Category::create([
-            'name' => $request->name,
+            'name' =>$request->input('name')
         ]);
 
         return response('تمت الاضافة ');

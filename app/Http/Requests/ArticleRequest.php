@@ -22,9 +22,9 @@ class ArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'=>'required',
-            'body'=>'required',
-            'category_ids'=>'required'
+            'title'=>'required|string',
+            'body'=>'required|string',
+            'category_ids.*'=>'required|int|exists:category,id'
         ];
     }
 }
