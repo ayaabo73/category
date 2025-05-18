@@ -33,8 +33,9 @@
             </form>
               @foreach ($articales as $articale )
         
-               <table class="table">
-  <thead>
+
+     <table class="table">
+      <thead>
     <tr>
       <th scope="id">{{ $articale->id }}</th>
       <th scope="title">{{ $articale->title}}</th>
