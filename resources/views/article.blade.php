@@ -1,6 +1,6 @@
 <h1>creat new article<h1>
  
-             <form action="{{route('store') }}" method="get'>
+             <form action="{{route('article.store') }}" method="post'>
              @csrf
             
                      <input type="text"  name="title" placeholder="title"  class="@error('title') is-invalid @enderror">

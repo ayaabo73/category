@@ -52,7 +52,7 @@ class CategoryController extends Controller
 
     }
 
-    public function delete(Category $Category)
+    public function destroy(Category $Category)
     {
 
         Category::destroy($Category->id);

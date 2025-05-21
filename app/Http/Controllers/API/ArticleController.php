@@ -57,7 +57,7 @@ class ArticleController extends Controller
 
     }
 
-    public function delete(Article $article)
+    public function destroy(Article $article)
     {
 
         Article::destroy($article->id);
