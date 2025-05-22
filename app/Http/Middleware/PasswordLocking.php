@@ -15,11 +15,10 @@ class PasswordLocking
      */
     public function handle(Request $request, Closure $next): Response
     {
-      if($request->hasHeader('Password') && $request->header('Password') == '123456') 
-       {
-        return $next($request);
-       }
+        if ($request->hasHeader('Password') && $request->header('Password') == '123456') {
+            return $next($request);
+        }
 
-        abort(403, "API is Locked");
+        abort(403, 'API is Locked');
     }
 }
