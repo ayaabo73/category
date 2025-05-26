@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ArticleIndexRequest;
 use App\Http\Requests\ArticleRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    public function index()
+    public function index(ArticleIndexRequest $request)
     {
-        $article = Article::all();
+        $articles = Article::paginate($request->input('per_page'))->withQueryString();
 
-        return ArticleResource::collection($article);
+        return ArticleResource::collection($articles);
     }
 
     public function show(Article $article)
