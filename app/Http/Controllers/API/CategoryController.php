@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Services\CategoryService;
 
 class CategoryController extends Controller
 {
@@ -24,38 +25,27 @@ class CategoryController extends Controller
         return CategoryResource::make($Category);
     }
 
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $request, CategoryService $service)
     {
 
-        $Category = Category::create([
-
-            'name' => $request->input('name'),
-
-        ]);
-
-        $Category->load('articles');
+        $Category = $service->create($request->input('name'));
 
         return CategoryResource::make($Category);
     }
 
-    public function update(CategoryRequest $request, Category $Category)
+    public function update(CategoryRequest $request, Category $Category, CategoryService $service)
     {
 
-        $Category->update([
-
-            'name' => $request->input('name'),
-        ]);
-
-        $Category->load('articles');
+        $Category = $service->update($Category, $request->input('name'));
 
         return CategoryResource::make($Category);
 
     }
 
-    public function destroy(Category $Category)
+    public function destroy(Category $Category, CategoryService $service)
     {
 
-        Category::destroy($Category->id);
+        $service->delete($Category);
 
         return response()->json(['message' => 'Category Deleted']);
 

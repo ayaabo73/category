@@ -23,6 +23,10 @@ class ArticleIndexRequest extends FormRequest
     {
         return [
             'per_page' => 'required|int|min:10|max:40',
+            'keyword' => 'string|max:256',
+            'category_ids' => 'array',
+            'category_ids.*' => 'int',
+
         ];
     }
 }
