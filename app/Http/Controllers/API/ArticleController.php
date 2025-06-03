@@ -18,22 +18,22 @@ class ArticleController extends Controller
         $this->service = $service;
     }
 
-    public function index(ArticleIndexRequest $request)
+    public function index(ArticleIndexRequest $request, ArticleService $service)
     {
-        $articles = Article::query()
-            ->latest()
-            ->when($request->filled('keyword'), fn ($query) => $query->where('title', 'like', '%'.$request->input('keyword').'%'))
-            ->when($request->filled('category_ids'), fn ($query) => $query->whereHas('categories', fn ($categoriesQuery) => $categoriesQuery->whereIn('categories.id', $request->input('category_ids'))))
-            ->paginate($request->input('per_page'))->withQueryString();
+        $articles = $this->service->all($request->input('per_page'), $request->validated());
 
         return ArticleResource::collection($articles);
     }
 
-    public function show(Article $article)
+    public function show(int $article)
     {
-        $article->load('categories');
+        $model = $this->service->first($article, ['categories']);
+        if (filled($model)) {
+            return ArticleResource::make($model);
+        } else {
+            abort(404, 'Article Not Found');
+        }
 
-        return ArticleResource::make($article);
     }
 
     public function store(ArticleRequest $request)
