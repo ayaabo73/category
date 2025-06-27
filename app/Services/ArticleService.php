@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Article;
+use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArticleService
@@ -26,24 +27,28 @@ class ArticleService
 
     }
 
-    public function create(string $title, string $body, array $category_ids): Article
+    public function create(string $title, string $body, array $category_ids, UploadedFile $image): Article
     {
         $article = Article::create([
             'title' => $title,
             'body' => $body,
+
         ]);
         $article->categories()->sync($category_ids);
+        $article->addMedia('$image')->toMediaCollection('images');
 
         return $article;
     }
 
-    public function update(Article $article, string $title, string $body, array $category_ids): Article
+    public function update(Article $article, string $title, string $body, array $category_ids, UploadedFile $image): Article
     {
         $article->update([
             'title' => $title,
             'body' => $body,
         ]);
         $article->categories()->sync($category_ids);
+        $article->clearMediaCollection('images');
+        $article->addMedia('$image')->toMediaCollection('images');
 
         return $article;
     }

@@ -39,7 +39,7 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
 
-        $article = $this->service->create($request->input('title'), $request->input('body'), $request->input('category_ids'));
+        $article = $this->service->create($request->input('title'), $request->input('body'), $request->input('category_ids'), $request->file('image'));
 
         $article->load('categories');
 
@@ -50,7 +50,7 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, Article $article, ArticleService $service)
     {
 
-        $article = $this->service->update($article, $request->input('title'), $request->input('body'), $request->input('category_ids'));
+        $article = $this->service->update($article, $request->input('title'), $request->input('body'), $request->input('category_ids'), $request->file('image'));
 
         $article->load('categories');
 
