@@ -35,7 +35,7 @@ class ArticleService
 
         ]);
         $article->categories()->sync($category_ids);
-        $article->addMedia('$image')->toMediaCollection('images');
+        $article->addMedia($image)->toMediaCollection('images');
 
         return $article;
     }
@@ -48,7 +48,7 @@ class ArticleService
         ]);
         $article->categories()->sync($category_ids);
         $article->clearMediaCollection('images');
-        $article->addMedia('$image')->toMediaCollection('images');
+        $article->addMedia($image)->toMediaCollection('images');
 
         return $article;
     }
