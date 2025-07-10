@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Article;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Symfony\Component\HttpFoundation\File\UploadedFile as FileUploadedFile;
 
 class ArticleService
 {
@@ -27,7 +28,7 @@ class ArticleService
 
     }
 
-    public function create(string $title, string $body, array $category_ids, UploadedFile $image): Article
+    public function create(string $title, string $body, array $category_ids, FileUploadedFile $image): Article
     {
         $article = Article::create([
             'title' => $title,
